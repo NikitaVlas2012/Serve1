@@ -4,6 +4,7 @@ var url = require('url');
 var fc = require('fs');
 const jsonfile = require('jsonfile')
 const file = 'index.json'
+var numbers = 0;
 
 var querystring = require('querystring');
 http.createServer(function (request, response) {   
@@ -19,15 +20,18 @@ http.createServer(function (request, response) {
                 const y = obj.name;
                 for(i = 0; i < y.length; i++) {
                     var uy = y[i]
-                    if(uy[0] != params.name){
-                        y.push(params.user)
-                        console.log(y)
-                        obj.name = y
-                        var json = JSON.stringify(obj);
-                        fc.writeFileSync('index.json', obj);
-                        response.write('Not_Acc');
-                        response.end();
+                    if(uy[0] == params.name){
+                        numbers = 1; 
+                        break;
                     } 
+                }
+                if(numbers == 1){
+                    response.write('No');
+                    response.end();
+                }
+                else{
+                    response.write('Yes');
+                    response.end();
                 }   
 
             })
