@@ -1,7 +1,8 @@
 
 var http = require('http');
 var url = require('url');
-const fs = require('fs')
+const jsonfile = require('jsonfile')
+const file = 'index.json'
 
 var querystring = require('querystring');
 http.createServer(function (request, response) {   
@@ -12,10 +13,16 @@ http.createServer(function (request, response) {
     request.on('end', ()=>{
         let params = querystring.parse(body);
         if(params.a_or_l == "avtorise"){
-            console.log(params);
+            jsonfile.readFile(file, function (err, obj) {
+                if (err) console.error(err)
+                a = obj.name;
+                if(a != params.user){
+                    console.log("gfhkjg");
+                    response.write('Not_Acc');
+                    response.end();
+                } 
+            })
+            console.log(params.user);
         };
     });
-
-    response.write('Дратути');
-    response.end();
 }).listen(3000);
