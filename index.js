@@ -1,8 +1,10 @@
 
 var http = require('http');
 var url = require('url');
+const fs = require('fs')
+
 var querystring = require('querystring');
-http.createServer(function (request, response) {
+http.createServer(function (request, response) {   
     let body = '';
     request.on('data', chunk => {
         body += chunk.toString();
@@ -10,7 +12,7 @@ http.createServer(function (request, response) {
     request.on('end', ()=>{
         let params = querystring.parse(body);
         if(params.a_or_l == "avtorise"){
-            console.log(params)
+            console.log(params);
         };
     });
 
