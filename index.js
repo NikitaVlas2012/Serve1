@@ -15,14 +15,17 @@ http.createServer(function (request, response) {
         if(params.a_or_l == "avtorise"){
             jsonfile.readFile(file, function (err, obj) {
                 if (err) console.error(err)
-                a = obj.name;
-                if(a != params.user){
-                    console.log("gfhkjg");
-                    response.write('Not_Acc');
-                    response.end();
-                } 
+                var y = obj.name;
+                for(i = 0; i < y.length; i++) {
+                    var uy = y[i]
+                    if(uy[0] != params.name){
+                        console.log("gfhkjg");
+                        response.write('Not_Acc');
+                        response.end();
+                    } 
+                }   
+
             })
-            console.log(params.user);
         };
     });
 }).listen(3000);
