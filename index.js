@@ -1,6 +1,7 @@
 
 var http = require('http');
 var url = require('url');
+var fs = require('fs');
 const jsonfile = require('jsonfile')
 const file = 'index.json'
 
@@ -15,11 +16,15 @@ http.createServer(function (request, response) {
         if(params.a_or_l == "avtorise"){
             jsonfile.readFile(file, function (err, obj) {
                 if (err) console.error(err)
-                var y = obj.name;
+                const y = obj.name;
                 for(i = 0; i < y.length; i++) {
                     var uy = y[i]
                     if(uy[0] != params.name){
-                        console.log("gfhkjg");
+                        y.push(params.user)
+                        console.log(y)
+                        obj.name = y
+                        var json = JSON.stringify(obj);
+                        fc.writeFileSync('index.json', obj);
                         response.write('Not_Acc');
                         response.end();
                     } 

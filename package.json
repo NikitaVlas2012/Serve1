@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "callback": "^0.0.1",
     "http-server": "^14.1.1",
     "jsonfile": "^6.1.0",
     "query-string": "^9.1.0",
