@@ -8,7 +8,7 @@ var numbers = 0;
 
 var querystring = require('querystring');
 http.createServer(function (request, response) { 
-    var numbers = 0;  
+    numbers = 0;  
     let body = '';
     request.on('data', chunk => {
         body += chunk.toString();
@@ -16,7 +16,6 @@ http.createServer(function (request, response) {
     request.on('end', ()=>{
         let params = querystring.parse(body);
         if(params.a_or_l == "avtorise"){
-            console.log(params.name);
             jsonfile.readFile(file, function (err, obj) {
                 if (err) console.error(err)
                 const y = obj.gtw;
@@ -29,9 +28,7 @@ http.createServer(function (request, response) {
                 }
                 if(numbers == 0){
                     y.push(params.user);
-                    console.log(y);
                     obj.gtw = y;
-                    console.log(obj);
                     response.write('Yes');
                     response.end();
                     var jsonData = JSON.stringify(obj);
@@ -41,14 +38,41 @@ http.createServer(function (request, response) {
                             console.log(err);
                         }
                     });
-                    
                 }
                 else{
                     response.write('No');
                     response.end();
                 }   
-
             })
         };
+
+
+
+
+        if(params.a_or_l == "login"){
+            jsonfile.readFile(file, function (err, obj) {
+                if (err) console.error(err)
+                const y = obj.gtw;
+                for(i = 0; i < y.length; i++) {
+                    var uy = y[i]
+                    if(uy[0] == params.name){
+                        if(uy[1] == params.pasword){
+                            numbers = 1; 
+                        }
+                        break;
+                    } 
+                }
+                if(numbers == 1){
+                    response.write('Yes');
+                    response.end();
+                }
+                else{
+                    response.write('No');
+                    response.end();
+                }   
+            })
+        };
+
+
     });
 }).listen(3000);
