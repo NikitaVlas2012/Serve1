@@ -5,10 +5,12 @@ var fc = require('fs');
 const jsonfile = require('jsonfile')
 const file = 'index.json'
 var numbers = 0;
+var ep = "0";
+var o_t_f_fo = "0";  
 
 var querystring = require('querystring');
 http.createServer(function (request, response) { 
-    numbers = 0;  
+    numbers = 0;
     let body = '';
     request.on('data', chunk => {
         body += chunk.toString();
@@ -46,9 +48,6 @@ http.createServer(function (request, response) {
             })
         };
 
-
-
-
         if(params.a_or_l == "login"){
             jsonfile.readFile(file, function (err, obj) {
                 if (err) console.error(err)
@@ -57,7 +56,11 @@ http.createServer(function (request, response) {
                     var uy = y[i]
                     if(uy[0] == params.name){
                         if(uy[1] == params.pasword){
-                            numbers = 1; 
+                            numbers = 1;
+                            console.log(uy[2])
+                            ep = uy[2];
+                            o_t_f_fo = uy[3];
+                            console.log(ep)
                         }
                         break;
                     } 
@@ -73,6 +76,15 @@ http.createServer(function (request, response) {
             })
         };
 
+        if(params.a_or_l == "ep_data"){
+            response.write(ep);
+            response.end();
+        };
+
+        if(params.a_or_l == "o_t_f_fo_data"){
+            response.write(o_t_f_fo);
+            response.end();
+        };
 
     });
 }).listen(3000);
