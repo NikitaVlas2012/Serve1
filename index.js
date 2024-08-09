@@ -7,7 +7,8 @@ const file = 'index.json'
 var numbers = 0;
 
 var querystring = require('querystring');
-http.createServer(function (request, response) {   
+http.createServer(function (request, response) { 
+    var numbers = 0;  
     let body = '';
     request.on('data', chunk => {
         body += chunk.toString();
@@ -15,9 +16,10 @@ http.createServer(function (request, response) {
     request.on('end', ()=>{
         let params = querystring.parse(body);
         if(params.a_or_l == "avtorise"){
+            console.log(params.name);
             jsonfile.readFile(file, function (err, obj) {
                 if (err) console.error(err)
-                const y = obj.name;
+                const y = obj.gtw;
                 for(i = 0; i < y.length; i++) {
                     var uy = y[i]
                     if(uy[0] == params.name){
@@ -25,12 +27,24 @@ http.createServer(function (request, response) {
                         break;
                     } 
                 }
-                if(numbers == 1){
-                    response.write('No');
+                if(numbers == 0){
+                    y.push(params.user);
+                    console.log(y);
+                    obj.gtw = y;
+                    console.log(obj);
+                    response.write('Yes');
                     response.end();
+                    var jsonData = JSON.stringify(obj);
+                    var fs = require('fs');
+                    fs.writeFile("index.json", jsonData, function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                    
                 }
                 else{
-                    response.write('Yes');
+                    response.write('No');
                     response.end();
                 }   
 
