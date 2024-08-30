@@ -7,10 +7,10 @@ const file = 'index.json'
 var numbers = 0;
 var ep = "0";
 var o_t_f_fo = "0";  
-
+var n = "0";
 var querystring = require('querystring');
 http.createServer(function (request, response) { 
-    var n = "0";
+    
     numbers = 0;
     let body = '';
     request.on('data', chunk => {
@@ -59,6 +59,7 @@ http.createServer(function (request, response) {
                     var uy = y[i]
                     if(uy[0] == params.name){
                         n = i;
+                        console.log(n);
                         if(uy[1] == params.pasword){
                             numbers = 1;
                             console.log(uy[2])
@@ -91,9 +92,36 @@ http.createServer(function (request, response) {
         };
 
         if(params.a_or_l == "nu"){
-            response.write(n);
+            var bar = '' + n;
+            response.write(bar);
             response.end()
         }
-
+        
+        if(params.a_or_l[0] == "Sohr"){
+            jsonfile.readFile(file, function (err, obj){
+                if (err) console.error(err)
+                const r = obj.gtw;
+                console.log(r);
+                var uu = r[params.a_or_l[1]];
+                console.log(uu);
+                var uu1 = params.a_or_l[2];
+                console.log(uu1);
+                var uu2 = params.a_or_l[3];
+                console.log(uu2);
+                uu[2] = uu1;
+                uu[3] = uu2;
+                console.log(params.a_or_l[1]);
+                obj.gtw[params.a_or_l[1]] = uu;
+                console.log(obj);
+            
+                var jsonata = JSON.stringify(obj);
+                var fs = require('fs');
+                fs.writeFile("index.json", jsonata, function(err) {
+                    if (err) {
+                    console.log(err);
+                    }
+                });
+            })
+        }
     });
 }).listen(3000);
