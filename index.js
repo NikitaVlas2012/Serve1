@@ -10,6 +10,7 @@ var o_t_f_fo = "0";
 
 var querystring = require('querystring');
 http.createServer(function (request, response) { 
+    var n = 0;
     numbers = 0;
     let body = '';
     request.on('data', chunk => {
@@ -23,6 +24,7 @@ http.createServer(function (request, response) {
                 const y = obj.gtw;
                 for(i = 0; i < y.length; i++) {
                     var uy = y[i]
+                    n = i;
                     if(uy[0] == params.name){
                         numbers = 1; 
                         break;
@@ -86,12 +88,10 @@ http.createServer(function (request, response) {
             response.end();
         };
 
-        if(params.a_or_l == "Soxr"){
-            jsonfile.readFile(file, function (err, obj) {
-                if (err) console.error(err)
-                const r = obj.gtw;
-            })
-        }
+        //i0f(params.a_or_l == "number"){
+            //response.write(n);
+            //response.end()
+        //}
 
     });
 }).listen(3000);
