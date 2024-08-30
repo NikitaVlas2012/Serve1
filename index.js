@@ -86,5 +86,12 @@ http.createServer(function (request, response) {
             response.end();
         };
 
+        if(params.a_or_l == "Soxr"){
+            jsonfile.readFile(file, function (err, obj) {
+                if (err) console.error(err)
+                const r = obj.gtw;
+            })
+        }
+
     });
 }).listen(3000);
