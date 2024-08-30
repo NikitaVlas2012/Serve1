@@ -10,7 +10,7 @@ var o_t_f_fo = "0";
 
 var querystring = require('querystring');
 http.createServer(function (request, response) { 
-    var n = 0;
+    var n = "0";
     numbers = 0;
     let body = '';
     request.on('data', chunk => {
@@ -24,8 +24,9 @@ http.createServer(function (request, response) {
                 const y = obj.gtw;
                 for(i = 0; i < y.length; i++) {
                     var uy = y[i]
-                    n = i;
+                    
                     if(uy[0] == params.name){
+                        n = i;
                         numbers = 1; 
                         break;
                     } 
@@ -57,6 +58,7 @@ http.createServer(function (request, response) {
                 for(i = 0; i < y.length; i++) {
                     var uy = y[i]
                     if(uy[0] == params.name){
+                        n = i;
                         if(uy[1] == params.pasword){
                             numbers = 1;
                             console.log(uy[2])
@@ -88,10 +90,10 @@ http.createServer(function (request, response) {
             response.end();
         };
 
-        //i0f(params.a_or_l == "number"){
-            //response.write(n);
-            //response.end()
-        //}
+        if(params.a_or_l == "nu"){
+            response.write(n);
+            response.end()
+        }
 
     });
 }).listen(3000);
