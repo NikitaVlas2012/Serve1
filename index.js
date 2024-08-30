@@ -24,7 +24,6 @@ http.createServer(function (request, response) {
                 const y = obj.gtw;
                 for(i = 0; i < y.length; i++) {
                     var uy = y[i]
-                    
                     if(uy[0] == params.name){
                         n = i;
                         numbers = 1; 
@@ -59,13 +58,10 @@ http.createServer(function (request, response) {
                     var uy = y[i]
                     if(uy[0] == params.name){
                         n = i;
-                        console.log(n);
                         if(uy[1] == params.pasword){
                             numbers = 1;
-                            console.log(uy[2])
                             ep = uy[2];
                             o_t_f_fo = uy[3];
-                            console.log(ep)
                         }
                         break;
                     } 
@@ -101,19 +97,12 @@ http.createServer(function (request, response) {
             jsonfile.readFile(file, function (err, obj){
                 if (err) console.error(err)
                 const r = obj.gtw;
-                console.log(r);
                 var uu = r[params.a_or_l[1]];
-                console.log(uu);
                 var uu1 = params.a_or_l[2];
-                console.log(uu1);
                 var uu2 = params.a_or_l[3];
-                console.log(uu2);
                 uu[2] = uu1;
                 uu[3] = uu2;
-                console.log(params.a_or_l[1]);
                 obj.gtw[params.a_or_l[1]] = uu;
-                console.log(obj);
-            
                 var jsonata = JSON.stringify(obj);
                 var fs = require('fs');
                 fs.writeFile("index.json", jsonata, function(err) {
