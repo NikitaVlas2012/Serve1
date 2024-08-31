@@ -1,6 +1,6 @@
 {
     "version": 1,
     "buildCommand": "next build",
-    "builds": [{"srs": "./index.js", "use": "@verrcel/node"}],
-    "routes": [{"srs": "/(.*)", "dest": "/"}]
+    "builds": [{"src": "./index.js", "use": "@verrcel/node"}],
+    "routes": [{"src": "/(.*)", "dest": "/"}]
 }
